@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: upaguru-mind
+
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/upaguru}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: upaguru_mind
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: upaguru_mind
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    mongodb:
+      uri: ${MONGO_URL:mongodb://localhost:27017/upaguru}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# OpenAI configuration
+openai:
+  api:
+    key: ${OPENAI_API_KEY:sk-your-openai-key}
+  model: ${OPENAI_MODEL:text-embedding-ada-002}
+
+# Swagger / SpringDoc OpenAPI
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  show-actuator: true
+
+# Actuator endpoints for debugging and monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true

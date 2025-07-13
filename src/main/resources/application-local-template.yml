@@ -1,0 +1,6 @@
+
+
+# OpenAI configuration
+openai:
+  api:
+    key: ${OPENAI_API_KEY:sk-your-openai-key}
